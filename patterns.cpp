@@ -13,7 +13,7 @@ int main(){
   //   }
   // }
 
-  //  square pattern
+  //  square  patterns
   // cout << "enter no of rows u want" << endl;
   // int n;
   // cin >> n;
