@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-//  find masximum number among three numbers
+//  find maximum number among three numbers
 // int max(int a, int b, int c) {
 //   if (a > b && a > c) {
 //     return a;
