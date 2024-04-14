@@ -139,7 +139,7 @@ int main() {
   //   cout<<"not found";
   // }
 
-  //  find first occurence of element by binarysearch
+  //  find first occurence of element using  binarysearch
   // vector<int> v{1, 3, 4, 4, 4, 4, 6, 7};
   // int target = 4;
   // int indexFirstOccurence = firstOccurence(v, target);
