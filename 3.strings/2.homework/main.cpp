@@ -1,5 +1,9 @@
 #include<iostream>
+#include<climits>
+#include<algorithm>
 #include<string.h>
+#include<vector>
+#include<map>
 using namespace std;
 
     bool isAnagram(string s, string t) {
@@ -86,7 +90,7 @@ using namespace std;
 
 
 
-    string longestCommonPrefix(vector<string>& strs) {
+    string longestCommonPrefix(vector<string> & strs) {
         string  ans;
         int i=0;
         while(true){
@@ -158,7 +162,78 @@ using namespace std;
 
 
 
+     string reorganizeString(string s){ 
+        int hash[26] = {0};
+        for(int i=0;i<s.size();i++){
+                //hashing
+                hash[s[i] -'a']++;
+        }
+        char max ;
+        int maxfreq = INT_MIN;
+        // print hash map
+        for(int i=0;i<26;i++){
+                if(hash[i] > maxfreq){
+                        max = i + 'a';
+                        maxfreq = hash[i] ;
+                }
+        }
+        int index=0;
+        while(maxfreq > 0 && index<s.size()){
+                s[index] = max;
+                maxfreq--;
+                index +=2;
+        }
+        if(maxfreq !=  0) return "";
+        hash[max - 'a'] = 0;
+        // place rest of chars
+        for(int i=0;i<26;i++){
+                while(hash[i] > 0){
+                 index = index >= s.size() ? 1:index;
+                 s[index] = i + 'a';
+                 hash[i]--;
+                 index += 2;
+                }       
+        }
 
+        return s;
+ }
+
+vector<vector<string> > groupAnagrams(vector<string> strs){
+// creating map
+ map< string , 	vector<string>> mpp;
+ for(auto str : strs){
+ string s = str;
+ sort(s.begin() , s.end());
+ mpp[s].push_back(str);
+ }
+
+ vector<vector <string> >ans;
+ for(auto it = mpp.begin() ; it != mpp.end();it++){
+ ans.push_back(it->second);
+ }
+return ans;
+}
+
+
+    int strStr(string haystack, string needle) {
+        int i=0;
+        int n = haystack.size() ; int m = needle.size();
+        int j =m;
+        int ans = INT_MAX;
+             if(haystack == needle) return 0;
+        while(j<n){
+       
+            if(haystack.substr(i,m) == needle){
+                if(i < ans) ans = i;
+                return i;
+            }
+            else{
+                i++;j++;
+            }
+        }
+         return -1; 
+    } 
+        
 
 
 int main(){
@@ -191,6 +266,34 @@ int main(){
 
 // 5:
 /* isomorphic string leetcode 205
-// string  s = "egg"; string t = "add"
-// bool ans = isIsomorphic(s , t);
-*/ cout<<ans;
+ string  s = "egg"; string t = "add"
+ bool ans = isIsomorphic(s , t);
+ cout<<ans;
+*/
+
+
+// 6:
+/* reorganize string 767
+ string s = "aaabc";
+ string ans = reorganizeString(s);
+ cout<<"ans : "<<ans<<endl;
+*/
+
+// 7: 
+/* group anagrams leetcode 49
+   strs = ["eat","tea","tan","ate","nat","bat"]
+   vector<vector<string> > ans =  groupAnagrams(strs);
+  cout<<ans;
+*/
+
+// 8:
+/* find the index of first occurence in a string
+ string s1 = "hello";
+ string s2 = "ll";
+ int ans =  strStr(s1 , s2);
+ cout<<ans;
+*/
+
+
+return 0;
+}	
